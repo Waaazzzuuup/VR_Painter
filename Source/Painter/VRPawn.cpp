@@ -23,16 +23,30 @@ void AVRPawn::BeginPlay()
 		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightHandController->SetOwner(this);
 	}
-
-	PC = GetController();
-	PC->InputComponent->BindAction(TEXT("RightTrigger"), IE_Pressed, this, &AVRPawn::TriggerPress);
-	
 }
 
 
-void AVRPawn::TriggerPress()
+void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	RightHandController->PaintStroke();
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	
+	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Pressed, this, &AVRPawn::RightTriggerPressed);
+	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Released, this, &AVRPawn::RightTriggerReleased);
+}
+
+
+
+void AVRPawn::RightTriggerPressed()
+{
+	if (RightHandController == nullptr) return;
+	RightHandController->TriggerPressed();
+}
+
+
+void AVRPawn::RightTriggerReleased()
+{
+	if (RightHandController == nullptr) return;
+	RightHandController->TriggerReleased();
 }
 
 

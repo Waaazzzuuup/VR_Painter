@@ -20,16 +20,17 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
-	void PaintStroke();
+	void TriggerPressed();
+	void TriggerReleased();
 
 private:
 	UPROPERTY()
 	UMotionControllerComponent* MotionController;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	TSubclassOf<AStroke> StrokeClass;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	AStroke* StrokeObj;
 	
 };

@@ -25,11 +25,17 @@ void AHandController::Tick(float DeltaTime)
 }
 
 
-void AHandController::PaintStroke()
+void AHandController::TriggerPressed()
 {
-	if (StrokeObj == nullptr) return;
+	if (StrokeClass == nullptr) return;
 
 	StrokeObj = GetWorld()->SpawnActor<AStroke>(StrokeClass, GetActorLocation(), GetActorRotation());
 }
 
 
+void AHandController::TriggerReleased()
+{
+	if (StrokeClass == nullptr) return;
+
+	StrokeObj = GetWorld()->SpawnActor<AStroke>(StrokeClass, GetActorLocation(), GetActorRotation());
+}

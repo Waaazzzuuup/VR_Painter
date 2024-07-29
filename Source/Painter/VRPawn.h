@@ -16,6 +16,7 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 private:
 	UPROPERTY(EditAnywhere)
@@ -33,5 +34,6 @@ private:
 	UPROPERTY()
 	AController* PC;
 
-	void TriggerPress();
+	void RightTriggerPressed();
+	void RightTriggerReleased();
 };
