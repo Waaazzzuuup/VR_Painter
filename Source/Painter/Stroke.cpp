@@ -14,8 +14,8 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 {
 	USplineMeshComponent* Spline = CreateSplineMesh();
 	// cursorL is global, inverseTP is to local, so it is cursor to local for stroke (bam)
-	FVector StartPosition = GetActorTransform().InverseTransformPosition(CursorLocation);
-	FVector EndPosition = GetActorTransform().InverseTransformPosition(PreviousCursorLocation);
+	const FVector StartPosition = GetActorTransform().InverseTransformPosition(CursorLocation);
+	const FVector EndPosition = GetActorTransform().InverseTransformPosition(PreviousCursorLocation);
 
 	Spline->SetStartAndEnd(StartPosition, FVector::ZeroVector, EndPosition, FVector::ZeroVector);
 
