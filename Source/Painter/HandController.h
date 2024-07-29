@@ -31,6 +31,6 @@ private:
 	TSubclassOf<AStroke> StrokeClass;
 
 	UPROPERTY(EditAnywhere)
-	AStroke* StrokeObj;
+	AStroke* CurrentStroke;
 	
 };

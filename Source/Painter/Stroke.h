@@ -2,6 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SplineMeshComponent.h"
+
 #include "Stroke.generated.h"
 
 UCLASS()
@@ -11,11 +13,20 @@ class PAINTER_API AStroke : public AActor
 	
 public:	
 	AStroke();
+	
+	void UpdateStroke(FVector CursorLocation);
 
-protected:
-	virtual void BeginPlay() override;
+private:
+	USplineMeshComponent* CreateSplineMesh();
 
-public:	
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* Root;
 
+	UPROPERTY(EditAnywhere)
+	UStaticMesh* SplineMesh;
+
+	UPROPERTY(EditAnywhere)
+	UMaterialInterface* SplineMaterial;
+
+	FVector PreviousCursorLocation;
 };
