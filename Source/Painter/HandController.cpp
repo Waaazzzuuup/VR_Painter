@@ -4,7 +4,10 @@
 AHandController::AHandController()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
+	MotionController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MotionController"));
+	SetRootComponent(MotionController);
+	MotionController->SetTrackingSource(EControllerHand::Right);
+	MotionController->SetShowDeviceModel(true);
 }
 
 
