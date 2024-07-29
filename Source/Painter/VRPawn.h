@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
+#include "HandController.h"
 #include "VRPawn.generated.h"
 
 UCLASS()
