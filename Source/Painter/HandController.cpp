@@ -24,3 +24,12 @@ void AHandController::Tick(float DeltaTime)
 
 }
 
+
+void AHandController::PaintStroke()
+{
+	if (StrokeObj == nullptr) return;
+
+	StrokeObj = GetWorld()->SpawnActor<AStroke>(StrokeClass, GetActorLocation(), GetActorRotation());
+}
+
+

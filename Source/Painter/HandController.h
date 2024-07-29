@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "MotionControllerComponent.h"
+#include "Stroke.h"
 #include "GameFramework/Actor.h"
 #include "HandController.generated.h"
 
@@ -19,8 +20,16 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
+	void PaintStroke();
+
 private:
 	UPROPERTY()
 	UMotionControllerComponent* MotionController;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AStroke> StrokeClass;
+
+	UPROPERTY(EditDefaultsOnly)
+	AStroke* StrokeObj;
 	
 };

@@ -23,7 +23,16 @@ void AVRPawn::BeginPlay()
 		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightHandController->SetOwner(this);
 	}
+
+	PC = GetController();
+	PC->InputComponent->BindAction(TEXT("RightTrigger"), IE_Pressed, this, &AVRPawn::TriggerPress);
 	
+}
+
+
+void AVRPawn::TriggerPress()
+{
+	RightHandController->PaintStroke();
 }
 
 

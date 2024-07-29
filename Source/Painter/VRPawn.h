@@ -24,8 +24,13 @@ private:
 	UCameraComponent* CameraComponent;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<class AHandController> HandControllerClass;
+	TSubclassOf<AHandController> HandControllerClass;
 
 	UPROPERTY()
 	AHandController* RightHandController;
+
+	UPROPERTY()
+	AController* PC;
+
+	void TriggerPress();
 };
