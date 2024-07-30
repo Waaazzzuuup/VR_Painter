@@ -15,7 +15,9 @@ AStroke::AStroke()
 void AStroke::UpdateStroke(FVector CursorLocation)
 {
 	FTransform StrokeTransform;
-	StrokeTransform.SetLocation(CursorLocation);
+	// so world cursor location goes to local in relation to stroke transform
+	FVector LocalCursorLocation = GetActorTransform().InverseTransformPosition(CursorLocation);
+	StrokeTransform.SetLocation(LocalCursorLocation);
 	StrokeMeshes->AddInstance(StrokeTransform);
 	PreviousCursorLocation = CursorLocation;
 }
