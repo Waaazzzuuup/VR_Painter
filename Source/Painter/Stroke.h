@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SplineMeshComponent.h"
+#include "Components/InstancedStaticMeshComponent.h"
 
 #include "Stroke.generated.h"
 
@@ -17,16 +18,12 @@ public:
 	void UpdateStroke(FVector CursorLocation);
 
 private:
-	USplineMeshComponent* CreateSplineMesh();
 
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
 
-	UPROPERTY(EditAnywhere)
-	UStaticMesh* SplineMesh;
-
-	UPROPERTY(EditAnywhere)
-	UMaterialInterface* SplineMaterial;
-
 	FVector PreviousCursorLocation;
+
+	UPROPERTY(VisibleAnywhere)
+	UInstancedStaticMeshComponent* StrokeMeshes;
 };
