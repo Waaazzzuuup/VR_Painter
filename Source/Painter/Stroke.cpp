@@ -7,8 +7,12 @@ AStroke::AStroke()
 	PrimaryActorTick.bCanEverTick = true;
 	Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	SetRootComponent(Root);
+	
 	StrokeMeshes = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("StrokeMeshes"));
 	StrokeMeshes->SetupAttachment(Root);
+	
+	JointMeshes = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("JointMeshes"));
+	JointMeshes->SetupAttachment(Root);
 }
 
 
@@ -17,11 +21,14 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 	if (PreviousCursorLocation.IsNearlyZero())
 	{
 		PreviousCursorLocation = CursorLocation;
+		JointMeshes->AddInstance(GetNextJointTransform(CursorLocation));
 		return;
 	}
 	StrokeMeshes->AddInstance(GetNextSegmentTransform(CursorLocation));
+	JointMeshes->AddInstance(GetNextJointTransform(CursorLocation));
 	PreviousCursorLocation = CursorLocation;
 }
+
 
 FTransform AStroke::GetNextSegmentTransform(FVector CursorLocation) const
 {
@@ -31,6 +38,16 @@ FTransform AStroke::GetNextSegmentTransform(FVector CursorLocation) const
 	SegmentTransform.SetLocation(GetNextSegmentLocation(CursorLocation));
 	return SegmentTransform;
 }
+
+
+FTransform AStroke::GetNextJointTransform(FVector CursorLocation) const
+{
+	FTransform JointTransform;
+	// location is the same actually
+	JointTransform.SetLocation(GetNextSegmentLocation(CursorLocation));
+	return JointTransform;
+}
+
 
 FVector AStroke::GetNextSegmentScale(FVector CursorLocation) const
 {
@@ -49,7 +66,5 @@ FQuat AStroke::GetNextSegmentRotation(FVector CursorLocation) const
 	FVector SegmentVector = CursorLocation - PreviousCursorLocation;
 	FVector SegmentVectorNormal = SegmentVector.GetSafeNormal();
 	// splines extrude along the x axis? whaa
-	FQuat ResultQuat = FQuat::FindBetweenNormals(FVector::ForwardVector, SegmentVectorNormal);
-	UE_LOG(LogTemp, Warning, TEXT("Q %s"), *ResultQuat.ToString());
-	return ResultQuat;	
+	return FQuat::FindBetweenNormals(FVector::ForwardVector, SegmentVectorNormal);
 }

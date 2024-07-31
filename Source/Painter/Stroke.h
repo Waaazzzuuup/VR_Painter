@@ -2,7 +2,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/SplineMeshComponent.h"
 #include "Components/InstancedStaticMeshComponent.h"
 
 #include "Stroke.generated.h"
@@ -20,6 +19,7 @@ public:
 private:
 
 	FTransform GetNextSegmentTransform(FVector CursorLocation) const;
+	FTransform GetNextJointTransform(FVector CursorLocation) const;
 
 	FVector GetNextSegmentScale(FVector CursorLocation) const;
 	FVector GetNextSegmentLocation(FVector CursorLocation) const;
@@ -32,4 +32,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UInstancedStaticMeshComponent* StrokeMeshes;
+
+	UPROPERTY(VisibleAnywhere)
+	UInstancedStaticMeshComponent* JointMeshes;
 };
