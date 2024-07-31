@@ -23,6 +23,10 @@ void AVRPawn::BeginPlay()
 		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightHandController->SetOwner(this);
 	}
+
+	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
+	SaveGameObj->Save();
+	
 }
 
 

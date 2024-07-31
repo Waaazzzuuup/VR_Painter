@@ -4,7 +4,10 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "HandController.h"
+#include "Save/PainterSaveGame.h"
+
 #include "VRPawn.generated.h"
+
 
 UCLASS()
 class PAINTER_API AVRPawn : public APawn
