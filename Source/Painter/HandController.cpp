@@ -32,7 +32,7 @@ void AHandController::TriggerPressed()
 {
 	if (StrokeClass == nullptr) return;
 
-	CurrentStroke = GetWorld()->SpawnActor<AStroke>(StrokeClass, GetActorLocation(), GetActorRotation());
+	CurrentStroke = GetWorld()->SpawnActor<AStroke>(StrokeClass, GetActorLocation(), FRotator());
 }
 
 
