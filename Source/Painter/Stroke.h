@@ -19,6 +19,12 @@ public:
 
 private:
 
+	FTransform GetNextSegmentTransform(FVector CursorLocation) const;
+
+	FVector GetNextSegmentScale(FVector CursorLocation) const;
+	FVector GetNextSegmentLocation(FVector CursorLocation) const;
+	FQuat GetNextSegmentRotation(FVector CursorLocation) const;
+	
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
 
