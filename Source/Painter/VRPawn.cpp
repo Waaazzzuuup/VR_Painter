@@ -23,10 +23,6 @@ void AVRPawn::BeginPlay()
 		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightHandController->SetOwner(this);
 	}
-
-	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
-	SaveGameObj->Save();
-	
 }
 
 
@@ -36,6 +32,8 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Pressed, this, &AVRPawn::RightTriggerPressed);
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Released, this, &AVRPawn::RightTriggerReleased);
+	PlayerInputComponent->BindAction(TEXT("SaveAction"), IE_Released, this, &AVRPawn::Save);
+	PlayerInputComponent->BindAction(TEXT("LoadAction"), IE_Released, this, &AVRPawn::Load);
 }
 
 
@@ -51,6 +49,20 @@ void AVRPawn::RightTriggerReleased()
 {
 	if (RightHandController == nullptr) return;
 	RightHandController->TriggerReleased();
+}
+
+void AVRPawn::Save()
+{
+	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
+	SaveGameObj->SetState("test987654321");
+	SaveGameObj->Save();
+}
+
+void AVRPawn::Load()
+{
+	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load();
+	if (SaveGameObj == nullptr) return;-----+-----
+	UE_LOG(LogTemp, Warning, TEXT("State: %s"), *SaveGameObj->GetState());
 }
 
 
