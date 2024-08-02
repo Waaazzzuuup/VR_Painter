@@ -55,7 +55,7 @@ void AVRPawn::RightTriggerReleased()
 void AVRPawn::Save()
 {
 	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
-	SaveGameObj->SetState("test987654321");
+	SaveGameObj->SetState("puss");
 	SaveGameObj->Save();
 }
 
