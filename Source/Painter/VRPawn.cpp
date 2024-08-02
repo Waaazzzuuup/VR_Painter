@@ -2,6 +2,7 @@
 #include "Engine/World.h"
 #include "HandController.h"
 
+
 AVRPawn::AVRPawn()
 {
 	PrimaryActorTick.bCanEverTick = false;
