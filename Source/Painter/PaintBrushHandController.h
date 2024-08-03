@@ -1,13 +1,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MotionControllerComponent.h"
+#include "HandControllerBase.h"
 #include "Stroke.h"
 #include "GameFramework/Actor.h"
 #include "PaintBrushHandController.generated.h"
 
 UCLASS()
-class PAINTER_API APaintBrushHandController : public AActor
+class PAINTER_API APaintBrushHandController : public AHandControllerBase
 {
 	GENERATED_BODY()
 	
@@ -20,12 +20,10 @@ protected:
 public:	
 	virtual void Tick(float DeltaTime) override;
 
-	void TriggerPressed();
-	void TriggerReleased();
+	virtual void TriggerPressed() override;
+	virtual void TriggerReleased() override;
 
 private:
-	UPROPERTY()
-	UMotionControllerComponent* MotionController;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AStroke> StrokeClass;

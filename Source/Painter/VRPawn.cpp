@@ -1,6 +1,5 @@
 #include "VRPawn.h"
 #include "Engine/World.h"
-#include "PaintBrushHandController.h"
 
 
 AVRPawn::AVRPawn()
@@ -20,7 +19,7 @@ void AVRPawn::BeginPlay()
 	Super::BeginPlay();
 	if (PaintBrushHandControllerClass)
 	{
-		RightPaintBrushHandController = GetWorld()->SpawnActor<APaintBrushHandController>(PaintBrushHandControllerClass);
+		RightPaintBrushHandController = GetWorld()->SpawnActor<AHandControllerBase>(PaintBrushHandControllerClass);
 		RightPaintBrushHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightPaintBrushHandController->SetOwner(this);
 	}
