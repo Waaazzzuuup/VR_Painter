@@ -56,6 +56,7 @@ void AVRPawn::Save()
 {
 	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
 	SaveGameObj->SetState("puss");
+	SaveGameObj->SerializeFromWorld(GetWorld());
 	SaveGameObj->Save();
 }
 
@@ -63,6 +64,7 @@ void AVRPawn::Load()
 {
 	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load();
 	if (SaveGameObj == nullptr) return;
+	SaveGameObj->DeserializeToWorld(GetWorld());
 	UE_LOG(LogTemp, Warning, TEXT("State: %s"), *SaveGameObj->GetState());
 }
 

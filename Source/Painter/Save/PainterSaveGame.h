@@ -2,6 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "Painter/Stroke.h"
+
 #include "PainterSaveGame.generated.h"
 
 
@@ -18,8 +20,15 @@ public:
 
 	void SetState(FString NewState) {State = NewState;}
 	FString GetState() const {return State;}
+
+	void SerializeFromWorld(UWorld* World);
+	void DeserializeToWorld(UWorld* World);
 	
 private:
 	UPROPERTY()
 	FString State;
+
+	// property for storing ONLY stroke subclasses (like BP children of a stroke)
+	UPROPERTY()
+	TArray<TSubclassOf<AStroke>> Strokes;
 };
