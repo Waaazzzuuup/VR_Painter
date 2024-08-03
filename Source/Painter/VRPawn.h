@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
-#include "HandController.h"
+#include "PaintBrushHandController.h"
 #include "Save/PainterSaveGame.h"
 
 #include "VRPawn.generated.h"
@@ -29,10 +29,10 @@ private:
 	UCameraComponent* CameraComponent;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AHandController> HandControllerClass;
+	TSubclassOf<APaintBrushHandController> PaintBrushHandControllerClass;
 
 	UPROPERTY()
-	AHandController* RightHandController;
+	APaintBrushHandController* RightPaintBrushHandController;
 
 	UPROPERTY()
 	AController* PC;

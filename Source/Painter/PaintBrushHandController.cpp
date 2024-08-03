@@ -1,7 +1,7 @@
-#include "HandController.h"
+#include "PaintBrushHandController.h"
 
 
-AHandController::AHandController()
+APaintBrushHandController::APaintBrushHandController()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	MotionController = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("MotionController"));
@@ -11,14 +11,14 @@ AHandController::AHandController()
 }
 
 
-void AHandController::BeginPlay()
+void APaintBrushHandController::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 
-void AHandController::Tick(float DeltaTime)
+void APaintBrushHandController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (CurrentStroke)
@@ -28,7 +28,7 @@ void AHandController::Tick(float DeltaTime)
 }
 
 
-void AHandController::TriggerPressed()
+void APaintBrushHandController::TriggerPressed()
 {
 	if (StrokeClass == nullptr) return;
 
@@ -36,7 +36,7 @@ void AHandController::TriggerPressed()
 }
 
 
-void AHandController::TriggerReleased()
+void APaintBrushHandController::TriggerReleased()
 {
 	CurrentStroke = nullptr;
 }

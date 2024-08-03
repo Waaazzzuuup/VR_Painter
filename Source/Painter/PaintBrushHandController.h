@@ -4,15 +4,15 @@
 #include "MotionControllerComponent.h"
 #include "Stroke.h"
 #include "GameFramework/Actor.h"
-#include "HandController.generated.h"
+#include "PaintBrushHandController.generated.h"
 
 UCLASS()
-class PAINTER_API AHandController : public AActor
+class PAINTER_API APaintBrushHandController : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	AHandController();
+	APaintBrushHandController();
 
 protected:
 	virtual void BeginPlay() override;
