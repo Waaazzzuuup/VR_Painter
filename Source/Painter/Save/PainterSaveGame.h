@@ -2,10 +2,20 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
-#include "Painter/Stroke.h"
 
 #include "PainterSaveGame.generated.h"
 
+USTRUCT()
+struct FStrokeState
+{
+	GENERATED_BODY()
+	// each stroke can have its own subclass (bp)
+	UPROPERTY()
+	TSubclassOf<class AStroke> StrokeClass;
+
+	UPROPERTY()
+	TArray<FVector> ControlPoints;
+};
 
 
 UCLASS()
@@ -27,8 +37,7 @@ public:
 private:
 	UPROPERTY()
 	FString State;
-
-	// property for storing ONLY stroke subclasses (like BP children of a stroke)
+	
 	UPROPERTY()
-	TArray<TSubclassOf<AStroke>> Strokes;
+	TArray<FStrokeState> Strokes;
 };

@@ -1,5 +1,6 @@
 #include "PainterSaveGame.h"
 #include "EngineUtils.h"
+#include "Painter/Stroke.h"
 #include "Kismet/GameplayStatics.h"
 
 UPainterSaveGame* UPainterSaveGame::Create()
@@ -21,10 +22,10 @@ UPainterSaveGame* UPainterSaveGame::Load()
 void UPainterSaveGame::SerializeFromWorld(UWorld* World)
 {
 	Strokes.Empty();
-	// store a subclass for each drawn stroke
+	// store a struct (class, points) for each drawn stroke
 	for (TActorIterator<AStroke> StrokeIter(World); StrokeIter; ++StrokeIter)
 	{
-		Strokes.Add(StrokeIter->GetClass());
+		Strokes.Add(StrokeIter->SerializeToStruct());
 	}
 }
 
@@ -35,9 +36,9 @@ void UPainterSaveGame::DeserializeToWorld(UWorld* World)
 	{
 		StrokeIter->Destroy();
 	}
-	// spawn one stroke for each recorded subclass (bp class)
-	for (TSubclassOf<AStroke> StrokeClass: Strokes)
+	// spawn one stroke for each recorded struct 
+	for (FStrokeState StrokeState: Strokes)
 	{
-		World->SpawnActor<AStroke>(StrokeClass);
+		AStroke::SpawnAndDeserializeFromStruct(World, StrokeState);
 	}
 }

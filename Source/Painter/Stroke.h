@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/InstancedStaticMeshComponent.h"
+#include "Save/PainterSaveGame.h"
 
 #include "Stroke.generated.h"
 
@@ -15,6 +16,10 @@ public:
 	AStroke();
 	
 	void UpdateStroke(FVector CursorLocation);
+
+	FStrokeState SerializeToStruct() const;
+	// receive address here as struct can be quite large
+	static AStroke* SpawnAndDeserializeFromStruct(UWorld* World, const FStrokeState& StrokeState);
 
 private:
 
@@ -35,4 +40,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UInstancedStaticMeshComponent* JointMeshes;
+
+	UPROPERTY()
+	TArray<FVector> StrokePoints;
 };

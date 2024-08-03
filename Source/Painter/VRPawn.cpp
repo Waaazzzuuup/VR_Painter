@@ -65,7 +65,6 @@ void AVRPawn::Load()
 	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load();
 	if (SaveGameObj == nullptr) return;
 	SaveGameObj->DeserializeToWorld(GetWorld());
-	UE_LOG(LogTemp, Warning, TEXT("State: %s"), *SaveGameObj->GetState());
 }
 
 

@@ -1,5 +1,7 @@
 #include "Stroke.h"
 
+#include "AssetRegistry/AssetDataTagMapSerializationDetails.h"
+
 
 // Sets default values
 AStroke::AStroke()
@@ -18,6 +20,7 @@ AStroke::AStroke()
 
 void AStroke::UpdateStroke(FVector CursorLocation)
 {
+	StrokePoints.Add(CursorLocation);
 	if (PreviousCursorLocation.IsNearlyZero())
 	{
 		PreviousCursorLocation = CursorLocation;
@@ -27,6 +30,24 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 	StrokeMeshes->AddInstance(GetNextSegmentTransform(CursorLocation));
 	JointMeshes->AddInstance(GetNextJointTransform(CursorLocation));
 	PreviousCursorLocation = CursorLocation;
+}
+
+FStrokeState AStroke::SerializeToStruct() const
+{
+	FStrokeState StrokeState;
+	StrokeState.StrokeClass = GetClass();
+	StrokeState.ControlPoints = StrokePoints;
+	return StrokeState;
+}
+
+AStroke* AStroke::SpawnAndDeserializeFromStruct(UWorld* World, const FStrokeState& StrokeState)
+{
+	AStroke* Stroke = World->SpawnActor<AStroke>(StrokeState.StrokeClass);
+	for (FVector Location : StrokeState.ControlPoints)
+	{
+		Stroke->UpdateStroke(Location);
+	}
+	return Stroke;
 }
 
 
