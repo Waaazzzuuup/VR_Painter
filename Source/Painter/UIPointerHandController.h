@@ -10,6 +10,8 @@ class PAINTER_API AUIPointerHandController : public AHandControllerBase
 {
 	GENERATED_BODY()
 
+	AUIPointerHandController();
+
 public:
 	virtual void TriggerPressed() override {};
 	virtual void TriggerReleased() override {};
