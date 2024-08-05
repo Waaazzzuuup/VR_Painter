@@ -16,7 +16,7 @@ class PAINTER_API AUIPointerHandController : public AHandControllerBase
 
 public:
 	virtual void TriggerPressed() override;
-	virtual void TriggerReleased() override {};
+	virtual void TriggerReleased() override;
 
 private:
 	UPROPERTY(VisibleAnywhere)

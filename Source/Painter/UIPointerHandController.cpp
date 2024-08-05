@@ -11,3 +11,9 @@ void AUIPointerHandController::TriggerPressed()
 	Super::TriggerPressed();
 	WidgetInteractionComp->PressPointerKey(EKeys::LeftMouseButton);
 }
+
+void AUIPointerHandController::TriggerReleased()
+{
+	Super::TriggerReleased();
+	WidgetInteractionComp->ReleasePointerKey(EKeys::LeftMouseButton);
+}
