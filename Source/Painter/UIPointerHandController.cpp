@@ -2,5 +2,12 @@
 
 AUIPointerHandController::AUIPointerHandController()
 {
-	
+	WidgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
+	WidgetInteractionComp->SetupAttachment(GetRootComponent());
+}
+
+void AUIPointerHandController::TriggerPressed()
+{
+	Super::TriggerPressed();
+	WidgetInteractionComp->PressPointerKey(EKeys::LeftMouseButton);
 }
