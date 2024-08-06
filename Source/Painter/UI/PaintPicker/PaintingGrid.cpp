@@ -7,21 +7,13 @@
 
 void UPaintingGrid::AddPainting()
 {
-	if (PaintingsGrid == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("PaintingsGrid is kinda null"));
-		return;
-	}
+	if (PaintingsGrid == nullptr) return;
 	
 	UUserWidget* NewWidget = CreateWidget<UUserWidget>(GetWorld(), GridCardClass);
+	if (NewWidget == nullptr) return;
+	
 	USizeBox* Cell = Cast<USizeBox>(PaintingsGrid->GetChildAt(0));
-
-	if (Cell == nullptr)
-	{
-		UE_LOG(LogTemp, Error, TEXT("cell to sizebox casting failed fuck"));
-		return;
-	}
-		
+	if (Cell == nullptr) return;
+	
 	Cell->AddChild(NewWidget);
-	UE_LOG(LogTemp, Warning, TEXT("yes"));
 }
