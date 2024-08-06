@@ -19,4 +19,8 @@ protected:
 	// last "magic" is to bind something samename-sametype to this property
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
 	UUniformGridPanel* PaintingsGrid;
+
+private:
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UUserWidget> GridCardClass;
 };
