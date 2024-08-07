@@ -16,4 +16,5 @@ void UPaintingGrid::AddPainting()
 	if (Cell == nullptr) return;
 	
 	Cell->AddChild(NewWidget);
+	UE_LOG(LogTemp, Warning, TEXT("widget added"));
 }
