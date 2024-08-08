@@ -1,5 +1,7 @@
 #include "Painter/UI/PaintPicker/PaintPicker.h"
 
+#include "PaintingGrid.h"
+
 
 APaintPicker::APaintPicker()
 {
@@ -19,6 +21,13 @@ APaintPicker::APaintPicker()
 void APaintPicker::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
+
+	if (PaintingsGrid == nullptr) return;
+
+	PaintingsGrid->AddPainting();
+	
 	
 }
 

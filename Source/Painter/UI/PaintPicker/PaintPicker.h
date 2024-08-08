@@ -18,7 +18,6 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	
 	UPROPERTY(VisibleAnywhere)
 	UWidgetComponent* PaintGrid;
 
@@ -27,5 +26,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
+	// save for later just in case
+	UPROPERTY(VisibleAnywhere)
+	class UPaintingGrid* PaintingsGrid;
 
 };
