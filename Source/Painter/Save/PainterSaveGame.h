@@ -23,6 +23,7 @@ class PAINTER_API UPainterSaveGame : public USaveGame
 {
 	GENERATED_BODY()
 
+	
 public:
 	static UPainterSaveGame* Create();
 	bool Save();
@@ -36,6 +37,7 @@ public:
 
 	FString GetSlotName() const {return SlotName;}
 
+	
 private:
 	UPROPERTY()
 	FString State;

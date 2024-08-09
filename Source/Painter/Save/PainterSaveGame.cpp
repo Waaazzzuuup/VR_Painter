@@ -2,23 +2,34 @@
 #include "EngineUtils.h"
 #include "Painter/Stroke.h"
 #include "Kismet/GameplayStatics.h"
+#include "PainterSaveGameIndex.h"
+
 
 UPainterSaveGame* UPainterSaveGame::Create()
 {
 	UPainterSaveGame* NewSaveGame = Cast<UPainterSaveGame>(UGameplayStatics::CreateSaveGameObject(StaticClass()));
 	NewSaveGame->SlotName = FGuid::NewGuid().ToString();
+	if (!NewSaveGame->Save()) return nullptr;
+	
+	UPainterSaveGameIndex* SaveIndex = UPainterSaveGameIndex::Load();
+	SaveIndex->AddSaveGame(NewSaveGame);
+	SaveIndex->Save();
+
 	return NewSaveGame;
 }
+
 
 bool UPainterSaveGame::Save()
 {
 	return UGameplayStatics::SaveGameToSlot(this, SlotName, 0);
 }
 
+
 UPainterSaveGame* UPainterSaveGame::Load(FString LoadSlotName)
 {
 	return Cast<UPainterSaveGame>(UGameplayStatics::LoadGameFromSlot(LoadSlotName, 0));
 }
+
 
 void UPainterSaveGame::SerializeFromWorld(UWorld* World)
 {
@@ -29,6 +40,7 @@ void UPainterSaveGame::SerializeFromWorld(UWorld* World)
 		Strokes.Add(StrokeIter->SerializeToStruct());
 	}
 }
+
 
 void UPainterSaveGame::DeserializeToWorld(UWorld* World)
 {

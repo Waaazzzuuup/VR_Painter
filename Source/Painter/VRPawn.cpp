@@ -47,7 +47,6 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 
-
 void AVRPawn::RightTriggerPressed()
 {
 	if (RightPaintBrushHandController == nullptr) return;
@@ -61,6 +60,7 @@ void AVRPawn::RightTriggerReleased()
 	RightPaintBrushHandController->TriggerReleased();
 }
 
+
 void AVRPawn::Save()
 {
 	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load(CurrentSlotName);
@@ -71,6 +71,7 @@ void AVRPawn::Save()
 		SaveGameObj->Save();
 	}
 }
+
 
 void AVRPawn::Load()
 {
