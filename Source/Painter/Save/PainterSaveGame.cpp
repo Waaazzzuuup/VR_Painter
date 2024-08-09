@@ -5,18 +5,19 @@
 
 UPainterSaveGame* UPainterSaveGame::Create()
 {
-	USaveGame* NewSaveGame = UGameplayStatics::CreateSaveGameObject(StaticClass());
-	return Cast<UPainterSaveGame>(NewSaveGame);
+	UPainterSaveGame* NewSaveGame = Cast<UPainterSaveGame>(UGameplayStatics::CreateSaveGameObject(StaticClass()));
+	NewSaveGame->SlotName = FGuid::NewGuid().ToString();
+	return NewSaveGame;
 }
 
 bool UPainterSaveGame::Save()
 {
-	return UGameplayStatics::SaveGameToSlot(this, "test", 0);
+	return UGameplayStatics::SaveGameToSlot(this, SlotName, 0);
 }
 
-UPainterSaveGame* UPainterSaveGame::Load()
+UPainterSaveGame* UPainterSaveGame::Load(FString LoadSlotName)
 {
-	return Cast<UPainterSaveGame>(UGameplayStatics::LoadGameFromSlot("test", 0));
+	return Cast<UPainterSaveGame>(UGameplayStatics::LoadGameFromSlot(LoadSlotName, 0));
 }
 
 void UPainterSaveGame::SerializeFromWorld(UWorld* World)

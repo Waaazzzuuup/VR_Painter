@@ -23,6 +23,16 @@ void AVRPawn::BeginPlay()
 		RightPaintBrushHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightPaintBrushHandController->SetOwner(this);
 	}
+	
+	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
+	if (SaveGameObj == nullptr) return;
+
+	SaveGameObj->SetState("SavedOnBeginPlay");
+	if(SaveGameObj->Save())
+	{
+		CurrentSlotName = SaveGameObj->GetSlotName();	
+	}
+	
 }
 
 
@@ -53,15 +63,18 @@ void AVRPawn::RightTriggerReleased()
 
 void AVRPawn::Save()
 {
-	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
-	SaveGameObj->SetState("puss");
-	SaveGameObj->SerializeFromWorld(GetWorld());
-	SaveGameObj->Save();
+	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load(CurrentSlotName);
+	if (SaveGameObj)
+	{
+		SaveGameObj->SetState("SavedByButton");
+		SaveGameObj->SerializeFromWorld(GetWorld());
+		SaveGameObj->Save();
+	}
 }
 
 void AVRPawn::Load()
 {
-	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load();
+	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load(CurrentSlotName);
 	if (SaveGameObj == nullptr) return;
 	SaveGameObj->DeserializeToWorld(GetWorld());
 }
