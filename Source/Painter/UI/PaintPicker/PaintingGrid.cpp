@@ -5,14 +5,14 @@
 
 #include "Components/SizeBox.h"
 
-void UPaintingGrid::AddPainting()
+void UPaintingGrid::AddPainting(int32 PaintingIndex)
 {
 	if (PaintingsGrid == nullptr) return;
 	
 	UUserWidget* NewWidget = CreateWidget<UUserWidget>(GetWorld(), GridCardClass);
 	if (NewWidget == nullptr) return;
 	
-	USizeBox* Cell = Cast<USizeBox>(PaintingsGrid->GetChildAt(0));
+	USizeBox* Cell = Cast<USizeBox>(PaintingsGrid->GetChildAt(PaintingIndex));
 	if (Cell == nullptr) return;
 	
 	Cell->AddChild(NewWidget);

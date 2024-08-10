@@ -13,7 +13,7 @@ class PAINTER_API UPaintingGrid : public UUserWidget
 
 public:
 	UFUNCTION(BlueprintCallable)
-	void AddPainting();
+	void AddPainting(int32 PaintingIndex);
 
 protected:
 	// last "magic" is to bind something samename-sametype to this property
