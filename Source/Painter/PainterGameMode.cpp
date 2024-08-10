@@ -5,6 +5,6 @@
 void APainterGameMode::InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage)
 {
 	Super::InitGame(MapName, Options, ErrorMessage);
-	const FString SlotName = UGameplayStatics::ParseOption(Options, "SlotName");
+	SlotName = UGameplayStatics::ParseOption(Options, "SlotName");
 	UE_LOG(LogTemp, Warning, TEXT("NAME: %s"), *SlotName);
 }

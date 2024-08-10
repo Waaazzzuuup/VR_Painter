@@ -9,4 +9,8 @@ class PAINTER_API APainterGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
+
+private:
+	UPROPERTY(VisibleAnywhere)
+	FString SlotName;
 };
