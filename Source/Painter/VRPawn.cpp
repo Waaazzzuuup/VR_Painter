@@ -1,5 +1,8 @@
 #include "VRPawn.h"
+
+#include "PainterGameMode.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AVRPawn::AVRPawn()
@@ -62,11 +65,8 @@ void AVRPawn::RightTriggerReleased()
 
 void AVRPawn::Save()
 {
-	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load(CurrentSlotName);
-	if (SaveGameObj)
-	{
-		SaveGameObj->SetState("SavedByButton");
-		SaveGameObj->SerializeFromWorld(GetWorld());
-		SaveGameObj->Save();
-	}
+	APainterGameMode* GameMode = Cast<APainterGameMode>(GetWorld()->GetAuthGameMode());
+	if (GameMode == nullptr) return;
+	GameMode->Save();
+	UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
 }

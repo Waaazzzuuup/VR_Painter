@@ -11,11 +11,28 @@ void APainterGameMode::InitGame(const FString& MapName, const FString& Options, 
 	UE_LOG(LogTemp, Warning, TEXT("NAME: %s"), *SlotName);
 }
 
-
 void APainterGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	Load();
+	UStereoLayerFunctionLibrary::HideSplashScreen();
+}
 
+void APainterGameMode::Save() const
+{
+	UPainterSaveGame* SaveGame = UPainterSaveGame::Load(SlotName);
+	if (SaveGame == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CANT SAVE GAME: %s"), *SlotName);
+		return;
+	}
+	SaveGame->SerializeFromWorld(GetWorld());
+	SaveGame->Save();
+}
+
+
+void APainterGameMode::Load() const
+{
 	UPainterSaveGame* SaveGame = UPainterSaveGame::Load(SlotName);
 	if (SaveGame == nullptr)
 	{
@@ -24,6 +41,5 @@ void APainterGameMode::BeginPlay()
 	}
 	
 	SaveGame->DeserializeToWorld(GetWorld());
-	UStereoLayerFunctionLibrary::HideSplashScreen();
 	UE_LOG(LogTemp, Warning, TEXT("Loaded game: %s"), *SlotName);
 }

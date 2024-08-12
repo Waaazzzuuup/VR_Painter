@@ -8,7 +8,12 @@ UCLASS()
 class PAINTER_API APainterGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
+	
 	virtual void InitGame(const FString& MapName, const FString& Options, FString& ErrorMessage) override;
+
+public: 
+	void Save() const;
+	void Load() const;
 
 protected:
 	virtual void BeginPlay() override;
