@@ -43,7 +43,6 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Pressed, this, &AVRPawn::RightTriggerPressed);
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Released, this, &AVRPawn::RightTriggerReleased);
 	PlayerInputComponent->BindAction(TEXT("SaveAction"), IE_Released, this, &AVRPawn::Save);
-	PlayerInputComponent->BindAction(TEXT("LoadAction"), IE_Released, this, &AVRPawn::Load);
 }
 
 
@@ -71,13 +70,3 @@ void AVRPawn::Save()
 		SaveGameObj->Save();
 	}
 }
-
-
-void AVRPawn::Load()
-{
-	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Load(CurrentSlotName);
-	if (SaveGameObj == nullptr) return;
-	SaveGameObj->DeserializeToWorld(GetWorld());
-}
-
-

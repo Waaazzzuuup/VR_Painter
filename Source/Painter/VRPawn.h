@@ -40,9 +40,8 @@ private:
 	UPROPERTY()
 	FString CurrentSlotName;
 
-	void RightTriggerPressed();
+	void RightTriggerPressed(); 
 	void RightTriggerReleased();
 
 	void Save();
-	void Load();
 };
