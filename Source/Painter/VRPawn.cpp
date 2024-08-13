@@ -26,16 +26,6 @@ void AVRPawn::BeginPlay()
 		RightPaintBrushHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightPaintBrushHandController->SetOwner(this);
 	}
-	
-	UPainterSaveGame* SaveGameObj = UPainterSaveGame::Create();
-	if (SaveGameObj == nullptr) return;
-
-	SaveGameObj->SetState("SavedOnBeginPlay");
-	if(SaveGameObj->Save())
-	{
-		CurrentSlotName = SaveGameObj->GetSlotName();	
-	}
-	
 }
 
 

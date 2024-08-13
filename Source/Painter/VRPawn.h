@@ -37,9 +37,6 @@ private:
 	UPROPERTY()
 	AController* PC;
 
-	UPROPERTY()
-	FString CurrentSlotName;
-
 	void RightTriggerPressed(); 
 	void RightTriggerReleased();
 
