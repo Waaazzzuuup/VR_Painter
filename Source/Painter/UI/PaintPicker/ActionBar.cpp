@@ -1,11 +1,8 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Painter/UI/PaintPicker/ActionBar.h"
 
 bool UActionBar::Initialize()
 {
-	bool IsInitialized = Super::Initialize();
+	const bool IsInitialized = Super::Initialize();
 	if (!IsInitialized) return false;
 
 	if (!ButtonAdd) return false;
@@ -20,11 +17,11 @@ bool UActionBar::Initialize()
 
 void UActionBar::ButtonAddClicked()
 {
-	
+	UE_LOG(LogTemp, Warning, TEXT("Add Button Clicked"));
 }
 
 
 void UActionBar::ButtonDeleteClicked()
 {
-	
+	UE_LOG(LogTemp, Warning, TEXT("Delete Button Clicked"));
 }
