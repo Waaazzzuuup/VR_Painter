@@ -37,7 +37,7 @@ private:
 	UPROPERTY()
 	AController* PC;
 
-	void RightTriggerPressed(); 
+	void RightTriggerPressed();
 	void RightTriggerReleased();
 
 	void Save();
