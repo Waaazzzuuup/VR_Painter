@@ -50,8 +50,6 @@ void APaintPicker::RefreshSlots()
 
 void APaintPicker::AddPainting()
 {
-	UPainterSaveGameIndex* SaveGameIndex = UPainterSaveGameIndex::Load();
-	SaveGameIndex->AddSaveGame(UPainterSaveGame::Create());
-	SaveGameIndex->Save();
+	UPainterSaveGame::Create();
 	RefreshSlots();
 }
