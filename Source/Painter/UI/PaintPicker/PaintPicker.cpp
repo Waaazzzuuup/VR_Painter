@@ -39,6 +39,7 @@ void APaintPicker::RefreshSlots()
 	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
 	if (PaintingsGrid == nullptr) return;
 	
+	PaintingsGrid->ClearAllPaintings();
 	int32 index = 0;
 	for (FString SlotName : UPainterSaveGameIndex::Load()->GetSlotNames())
 	{
@@ -52,4 +53,13 @@ void APaintPicker::AddPainting()
 {
 	UPainterSaveGame::Create();
 	RefreshSlots();
+}
+
+
+void APaintPicker::ToggleDeleteMode()
+{
+	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
+	if (PaintingsGrid == nullptr) return;
+	
+	PaintingsGrid->ClearAllPaintings();
 }

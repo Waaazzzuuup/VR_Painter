@@ -23,5 +23,5 @@ void UActionBar::ButtonAddClicked()
 
 void UActionBar::ButtonDeleteClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Delete Button Clicked"));
+	if (ParentPicker) ParentPicker->ToggleDeleteMode();
 }

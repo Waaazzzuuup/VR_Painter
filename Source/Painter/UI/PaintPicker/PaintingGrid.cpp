@@ -20,3 +20,15 @@ void UPaintingGrid::AddPainting(int32 PaintingIndex, FString PaintingName)
 	Cell->AddChild(NewWidget);
 	UE_LOG(LogTemp, Warning, TEXT("widget added"));
 }
+
+
+void UPaintingGrid::ClearAllPaintings()
+{
+	if(PaintingsGrid == nullptr) return;
+	for (int32 i = 0; i < PaintingsGrid->GetChildrenCount(); i++)
+	{
+		USizeBox* Cell = Cast<USizeBox>(PaintingsGrid->GetChildAt(i));
+		if (Cell == nullptr) continue;
+		Cell->ClearChildren();
+	}
+}

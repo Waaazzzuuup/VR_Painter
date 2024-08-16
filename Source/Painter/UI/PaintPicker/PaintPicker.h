@@ -14,6 +14,7 @@ class PAINTER_API APaintPicker : public AActor
 public:	
 	APaintPicker();
 	void AddPainting();
+	void ToggleDeleteMode();
 
 protected:
 	virtual void BeginPlay() override;
