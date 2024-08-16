@@ -17,11 +17,11 @@ bool UActionBar::Initialize()
 
 void UActionBar::ButtonAddClicked()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Add Button Clicked"));
+	if (ParentPicker) ParentPicker->AddPainting();
 }
 
 
 void UActionBar::ButtonDeleteClicked()
 {
-	//UE_LOG(LogTemp, Warning, TEXT("Delete Button Clicked"));
+	UE_LOG(LogTemp, Warning, TEXT("Delete Button Clicked"));
 }

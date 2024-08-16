@@ -1,5 +1,6 @@
 #include "Painter/UI/PaintPicker/PaintPicker.h"
 
+#include "ActionBar.h"
 #include "PaintingGrid.h"
 #include "Painter/Save/PainterSaveGameIndex.h"
 
@@ -23,10 +24,21 @@ void APaintPicker::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ActionBarWidget = Cast<UActionBar>(ActionBar->GetUserWidgetObject());
+	if (ActionBarWidget)
+	{
+		ActionBarWidget->SetParentPicker(this);
+	}
+	
+	RefreshSlots();
+}
+
+
+void APaintPicker::RefreshSlots()
+{
 	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
-
 	if (PaintingsGrid == nullptr) return;
-
+	
 	int32 index = 0;
 	for (FString SlotName : UPainterSaveGameIndex::Load()->GetSlotNames())
 	{
@@ -36,3 +48,10 @@ void APaintPicker::BeginPlay()
 }
 
 
+void APaintPicker::AddPainting()
+{
+	UPainterSaveGameIndex* SaveGameIndex = UPainterSaveGameIndex::Load();
+	SaveGameIndex->AddSaveGame(UPainterSaveGame::Create());
+	SaveGameIndex->Save();
+	RefreshSlots();
+}

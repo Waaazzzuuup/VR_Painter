@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PaintPicker.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "ActionBar.generated.h"
@@ -12,6 +13,7 @@ class PAINTER_API UActionBar : public UUserWidget
 
 public:
 	virtual bool Initialize() override;
+	void SetParentPicker(APaintPicker* NewParentPicker) {ParentPicker = NewParentPicker;}
 
 protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
@@ -26,4 +28,7 @@ private:
 	
 	UFUNCTION()
 	void ButtonDeleteClicked();
+
+	UPROPERTY()
+	APaintPicker* ParentPicker;
 };

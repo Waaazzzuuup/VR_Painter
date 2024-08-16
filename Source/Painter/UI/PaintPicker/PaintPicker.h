@@ -13,6 +13,7 @@ class PAINTER_API APaintPicker : public AActor
 	
 public:	
 	APaintPicker();
+	void AddPainting();
 
 protected:
 	virtual void BeginPlay() override;
@@ -26,8 +27,13 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
+	
+	void RefreshSlots();
+	
 	// save for later just in case
 	UPROPERTY(VisibleAnywhere)
 	class UPaintingGrid* PaintingsGrid;
+	UPROPERTY(VisibleAnywhere)
+	class UActionBar* ActionBarWidget;
 
 };
