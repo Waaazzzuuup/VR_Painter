@@ -16,6 +16,8 @@ public:
 	virtual void TriggerPressed() {};
 	virtual void TriggerReleased() {};
 
+	void SetTrackingHand(EControllerHand Hand);
+	
 private:
 	UPROPERTY()
 	UMotionControllerComponent* MotionController;

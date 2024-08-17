@@ -20,11 +20,21 @@ AVRPawn::AVRPawn()
 void AVRPawn::BeginPlay()
 {
 	Super::BeginPlay();
+
 	if (RightHandControllerClass)
 	{
 		RightHandController = GetWorld()->SpawnActor<AHandControllerBase>(RightHandControllerClass);
 		RightHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
 		RightHandController->SetOwner(this);
+		RightHandController->SetTrackingHand(EControllerHand::Right);
+	}
+	
+	if (LeftHandControllerClass)
+	{
+		LeftHandController = GetWorld()->SpawnActor<AHandControllerBase>(LeftHandControllerClass);
+		LeftHandController->AttachToComponent(VRRoot, FAttachmentTransformRules::SnapToTargetIncludingScale);
+		LeftHandController->SetOwner(this);
+		LeftHandController->SetTrackingHand(EControllerHand::Left);
 	}
 }
 

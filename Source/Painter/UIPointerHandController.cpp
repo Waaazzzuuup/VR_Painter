@@ -4,6 +4,8 @@ AUIPointerHandController::AUIPointerHandController()
 {
 	WidgetInteractionComp = CreateDefaultSubobject<UWidgetInteractionComponent>(TEXT("WidgetInteraction"));
 	WidgetInteractionComp->SetupAttachment(GetRootComponent());
+	// let it be there for now
+	SetTrackingHand(EControllerHand::Right);
 }
 
 void AUIPointerHandController::TriggerPressed()

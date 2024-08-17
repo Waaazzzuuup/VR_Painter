@@ -30,15 +30,21 @@ private:
 	
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AHandControllerBase> RightHandControllerClass;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AHandControllerBase> LeftHandControllerClass;
 
 	UPROPERTY()
 	AHandControllerBase* RightHandController;
+
+	UPROPERTY()
+	AHandControllerBase* LeftHandController;
 
 	UPROPERTY()
 	AController* PC;
 
 	void RightTriggerPressed();
 	void RightTriggerReleased();
-
+	
 	void Save();
 };
