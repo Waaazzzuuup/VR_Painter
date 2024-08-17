@@ -29,10 +29,10 @@ private:
 	UCameraComponent* CameraComponent;
 	
 	UPROPERTY(EditDefaultsOnly)
-	TSubclassOf<AHandControllerBase> PaintBrushHandControllerClass;
+	TSubclassOf<AHandControllerBase> RightHandControllerClass;
 
 	UPROPERTY()
-	AHandControllerBase* RightPaintBrushHandController;
+	AHandControllerBase* RightHandController;
 
 	UPROPERTY()
 	AController* PC;
