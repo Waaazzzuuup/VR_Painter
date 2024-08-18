@@ -14,6 +14,9 @@ class PAINTER_API APainterGameMode : public AGameModeBase
 public: 
 	void Save() const;
 	void Load() const;
+	
+	UFUNCTION(BlueprintCallable)
+	void SaveAndQuit();
 
 protected:
 	virtual void BeginPlay() override;

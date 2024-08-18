@@ -43,3 +43,10 @@ void APainterGameMode::Load() const
 	SaveGame->DeserializeToWorld(GetWorld());
 	UE_LOG(LogTemp, Warning, TEXT("Loaded game: %s"), *SlotName);
 }
+
+
+void APainterGameMode::SaveAndQuit()
+{
+	Save();
+	UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
+}
