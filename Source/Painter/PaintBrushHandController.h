@@ -30,5 +30,10 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	AStroke* CurrentStroke;
-	
+
+	UPROPERTY(EditAnywhere)
+	USceneComponent* BrushTip;
+	// local to controller tip location, cache because its const
+	UPROPERTY(VisibleAnywhere)
+	FVector BrushTipLocation;
 };
