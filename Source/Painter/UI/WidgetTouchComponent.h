@@ -13,4 +13,7 @@ class PAINTER_API UWidgetTouchComponent : public UWidgetInteractionComponent
 
 public:
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+private:
+	bool bIsClicked = false;
 };
