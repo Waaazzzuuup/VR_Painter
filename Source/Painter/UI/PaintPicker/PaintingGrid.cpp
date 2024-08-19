@@ -15,7 +15,6 @@ void UPaintingGrid::AddPainting(int32 PaintingIndex, FString PaintingName)
 	if (Cell == nullptr) return;
 	
 	Cell->AddChild(NewWidget);
-	UE_LOG(LogTemp, Warning, TEXT("widget added"));
 }
 
 
@@ -28,4 +27,18 @@ void UPaintingGrid::ClearAllPaintings()
 		if (Cell == nullptr) continue;
 		Cell->ClearChildren();
 	}
+}
+
+// bool is for "graying" out the dots
+void UPaintingGrid::AddPageDot(bool Active)
+{
+	if (PagesDots == nullptr) return;  
+
+	UPageDot* NewPageDot = CreateWidget<UPageDot>(GetWorld(), PageDotClass);
+	if (NewPageDot == nullptr) return;
+
+	if (!Active) NewPageDot->SetRenderOpacity(0.5);
+
+	PagesDots->AddChild(NewPageDot);
+	UE_LOG(LogTemp, Warning, TEXT("dot added"));
 }

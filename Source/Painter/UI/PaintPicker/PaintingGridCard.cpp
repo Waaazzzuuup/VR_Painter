@@ -11,6 +11,7 @@ void UPaintingGridCard::SetPaintingName(FString NewPaintingName)
 	CardButton->OnClicked.AddDynamic(this, &UPaintingGridCard::CardButtonClicked);
 }
 
+
 void UPaintingGridCard::CardButtonClicked()
 {
 	// fix for long vr level loading 

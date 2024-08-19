@@ -38,6 +38,10 @@ void APaintPicker::RefreshSlots()
 {
 	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
 	if (PaintingsGrid == nullptr) return;
+
+	PaintingsGrid->AddPageDot(false);
+	PaintingsGrid->AddPageDot(false);
+	PaintingsGrid->AddPageDot(false);
 	
 	PaintingsGrid->ClearAllPaintings();
 	int32 index = 0;
