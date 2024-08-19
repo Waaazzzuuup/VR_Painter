@@ -23,7 +23,7 @@ APaintPicker::APaintPicker()
 void APaintPicker::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	ActionBarWidget = Cast<UActionBar>(ActionBar->GetUserWidgetObject());
 	if (ActionBarWidget)
 	{
@@ -38,6 +38,8 @@ void APaintPicker::RefreshSlots()
 {
 	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
 	if (PaintingsGrid == nullptr) return;
+
+	UE_LOG(LogTemp, Warning, TEXT("Pages: %d"), GetNumberOfPages());
 
 	PaintingsGrid->AddPageDot(true);
 	PaintingsGrid->AddPageDot(false);
@@ -66,4 +68,15 @@ void APaintPicker::ToggleDeleteMode()
 	if (PaintingsGrid == nullptr) return;
 	
 	PaintingsGrid->ClearAllPaintings();
+}
+
+
+int32 APaintPicker::GetNumberOfPages() const
+{
+	if (PaintingsGrid == nullptr) return 0;
+	
+	int32 TotalNumberOfSlots = UPainterSaveGameIndex::Load()->GetSlotNames().Num();
+	int32 SlotsPerPage = PaintingsGrid->GetNumberOfSlots();
+	
+	return FMath::CeilToInt( (float) TotalNumberOfSlots / SlotsPerPage);
 }

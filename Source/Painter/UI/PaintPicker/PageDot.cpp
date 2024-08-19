@@ -2,5 +2,5 @@
 
 void UPageDot::SetActive(bool Active)
 {
-	DotImage->SetOpacity(Active ? 1.0 : 0.25);
+	DotImage->SetOpacity(Active ? 1.0 : 0.4);
 }

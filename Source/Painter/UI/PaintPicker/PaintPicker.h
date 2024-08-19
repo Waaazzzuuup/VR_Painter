@@ -37,4 +37,6 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UActionBar* ActionBarWidget;
 
+	int32 GetNumberOfPages() const;
+
 };

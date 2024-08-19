@@ -44,3 +44,10 @@ void UPaintingGrid::AddPageDot(bool Active)
 	BoxSlot->SetPadding(FMargin(8.0, 0.0, 0.0, 0.0));
 	UE_LOG(LogTemp, Warning, TEXT("dot added"));
 }
+
+
+int32 UPaintingGrid::GetNumberOfSlots() const
+{
+	if (PaintingsGrid== nullptr) return 0;
+	return PaintingsGrid->GetChildrenCount();
+}

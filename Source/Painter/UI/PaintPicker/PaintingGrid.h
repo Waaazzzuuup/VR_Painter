@@ -21,6 +21,8 @@ public:
 	
 	void AddPageDot(bool Active);
 
+	int32 GetNumberOfSlots() const;
+
 protected:
 	// last "magic" is to bind something samename-sametype to this property
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
