@@ -30,6 +30,8 @@ private:
 	USceneComponent* Root;
 	
 	void RefreshSlots();
+	void RefreshDots();
+	void RefreshUI();
 	
 	// save for later just in case
 	UPROPERTY(VisibleAnywhere)
@@ -38,5 +40,8 @@ private:
 	class UActionBar* ActionBarWidget;
 
 	int32 GetNumberOfPages() const;
+
+	UPROPERTY(EditAnywhere)
+	int32 CurrentPage = 0;
 
 };

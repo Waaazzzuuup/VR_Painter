@@ -29,23 +29,19 @@ void APaintPicker::BeginPlay()
 	{
 		ActionBarWidget->SetParentPicker(this);
 	}
+
+	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
 	
-	RefreshSlots();
+	RefreshUI();
 }
 
 
 void APaintPicker::RefreshSlots()
 {
-	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
 	if (PaintingsGrid == nullptr) return;
-
-	UE_LOG(LogTemp, Warning, TEXT("Pages: %d"), GetNumberOfPages());
-
-	PaintingsGrid->AddPageDot(true);
-	PaintingsGrid->AddPageDot(false);
-	PaintingsGrid->AddPageDot(false);
 	
 	PaintingsGrid->ClearAllPaintings();
+	
 	int32 index = 0;
 	for (FString SlotName : UPainterSaveGameIndex::Load()->GetSlotNames())
 	{
@@ -55,10 +51,28 @@ void APaintPicker::RefreshSlots()
 }
 
 
+void APaintPicker::RefreshDots()
+{
+	if (PaintingsGrid == nullptr) return;
+	PaintingsGrid->ClearAllPageDots();
+	for (int32 i = 0; i < GetNumberOfPages(); i++)
+	{
+		PaintingsGrid->AddPageDot(i == CurrentPage);
+	}
+}
+
+
+void APaintPicker::RefreshUI()
+{
+	RefreshSlots();
+	RefreshDots();
+}
+
+
 void APaintPicker::AddPainting()
 {
 	UPainterSaveGame::Create();
-	RefreshSlots();
+	RefreshUI();
 }
 
 

@@ -30,6 +30,13 @@ void UPaintingGrid::ClearAllPaintings()
 	}
 }
 
+
+void UPaintingGrid::ClearAllPageDots()
+{
+	if(PagesDots == nullptr) return;
+	PagesDots->ClearChildren();
+}
+
 // bool is for "graying" out the dots
 void UPaintingGrid::AddPageDot(bool Active)
 {
