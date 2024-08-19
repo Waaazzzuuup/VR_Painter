@@ -38,10 +38,9 @@ void UPaintingGrid::AddPageDot(bool Active)
 	UPageDot* NewPageDot = CreateWidget<UPageDot>(GetWorld(), PageDotClass);
 	if (NewPageDot == nullptr) return;
 
-	if (!Active) NewPageDot->SetRenderOpacity(0.5);
+	NewPageDot->SetActive(Active);
 
 	UHorizontalBoxSlot* BoxSlot = PagesDots->AddChildToHorizontalBox(NewPageDot);
-	FMargin SlotMargin(8.0, 0.0, 0.0, 0.0);
-	BoxSlot->SetPadding(SlotMargin);
+	BoxSlot->SetPadding(FMargin(8.0, 0.0, 0.0, 0.0));
 	UE_LOG(LogTemp, Warning, TEXT("dot added"));
 }
