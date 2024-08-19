@@ -1,5 +1,6 @@
 #include "Painter/UI/PaintPicker/PaintingGrid.h"
 
+#include "Components/HorizontalBoxSlot.h"
 #include "Components/SizeBox.h"
 
 void UPaintingGrid::AddPainting(int32 PaintingIndex, FString PaintingName)
@@ -39,6 +40,8 @@ void UPaintingGrid::AddPageDot(bool Active)
 
 	if (!Active) NewPageDot->SetRenderOpacity(0.5);
 
-	PagesDots->AddChild(NewPageDot);
+	UHorizontalBoxSlot* BoxSlot = PagesDots->AddChildToHorizontalBox(NewPageDot);
+	FMargin SlotMargin(8.0, 0.0, 0.0, 0.0);
+	BoxSlot->SetPadding(SlotMargin);
 	UE_LOG(LogTemp, Warning, TEXT("dot added"));
 }
