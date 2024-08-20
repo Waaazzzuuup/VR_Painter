@@ -4,7 +4,6 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Pawn.h"
 #include "HandControllerBase.h"
-#include "Save/PainterSaveGame.h"
 
 #include "VRPawn.generated.h"
 
@@ -45,5 +44,10 @@ private:
 
 	void RightTriggerPressed();
 	void RightTriggerReleased();
+	void PaginateRightAxisInput(float AxisValue);
 	
+	int32 LastPageOffset = 0;
+
+	UPROPERTY(EditDefaultsOnly)
+	float RightAxisThreshold = 0.8f;
 };

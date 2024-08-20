@@ -45,6 +45,7 @@ void AVRPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Pressed, this, &AVRPawn::RightTriggerPressed);
 	PlayerInputComponent->BindAction(TEXT("RightTrigger"), IE_Released, this, &AVRPawn::RightTriggerReleased);
+	PlayerInputComponent->BindAxis(TEXT("PaginateRight"), this, &AVRPawn::PaginateRightAxisInput);
 }
 
 
@@ -59,4 +60,16 @@ void AVRPawn::RightTriggerReleased()
 {
 	if (RightHandController == nullptr) return;
 	RightHandController->TriggerReleased();
+}
+
+void AVRPawn::PaginateRightAxisInput(float AxisValue)
+{
+	int32 PageOffset = 0;
+	PageOffset += AxisValue > RightAxisThreshold ? 1 : 0;
+	PageOffset += AxisValue < -RightAxisThreshold ? -1 : 0;
+	if (PageOffset != LastPageOffset && PageOffset != 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("value changed to %d"), PageOffset)
+	}
+	LastPageOffset = PageOffset;
 }
