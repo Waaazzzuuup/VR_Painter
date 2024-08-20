@@ -41,8 +41,7 @@ private:
 	class UActionBar* ActionBarWidget;
 
 	int32 GetNumberOfPages() const;
-
-	UPROPERTY(EditAnywhere)
+	
 	int32 CurrentPage = 0;
 
 };

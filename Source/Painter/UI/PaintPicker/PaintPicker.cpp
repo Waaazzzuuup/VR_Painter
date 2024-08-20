@@ -42,11 +42,12 @@ void APaintPicker::RefreshSlots()
 	
 	PaintingsGrid->ClearAllPaintings();
 	
-	int32 index = 0;
-	for (FString SlotName : UPainterSaveGameIndex::Load()->GetSlotNames())
+	// number of the first slot for each page
+	int32 StartOffset = CurrentPage * PaintingsGrid->GetNumberOfSlots();
+	TArray<FString> SlotNames = UPainterSaveGameIndex::Load()->GetSlotNames();
+	for (int32 i = 0; (i < PaintingsGrid->GetNumberOfSlots()) && (StartOffset + i < SlotNames.Num()); ++i)
 	{
-		PaintingsGrid->AddPainting(index, SlotName);
-		index++;
+		PaintingsGrid->AddPainting(i, SlotNames[StartOffset + i]);
 	}
 }
 
