@@ -1,8 +1,8 @@
 #include "VRPawn.h"
 
-#include "PainterGameMode.h"
 #include "Engine/World.h"
-#include "Kismet/GameplayStatics.h"
+#include "UI/PaintPicker/PaintPicker.h"
+#include "EngineUtils.h"
 
 
 AVRPawn::AVRPawn()
@@ -69,7 +69,32 @@ void AVRPawn::PaginateRightAxisInput(float AxisValue)
 	PageOffset += AxisValue < -RightAxisThreshold ? -1 : 0;
 	if (PageOffset != LastPageOffset && PageOffset != 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("value changed to %d"), PageOffset)
+		UpdateCurrentPage(PageOffset);
 	}
 	LastPageOffset = PageOffset;
 }
+
+
+void AVRPawn::UpdateCurrentPage(int32 Offset)
+{
+	for (TActorIterator<APaintPicker> PaintPickerIter(GetWorld()); PaintPickerIter; ++PaintPickerIter)
+	{
+		PaintPickerIter->UpdateCurrentPage(Offset);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

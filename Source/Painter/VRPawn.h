@@ -45,6 +45,7 @@ private:
 	void RightTriggerPressed();
 	void RightTriggerReleased();
 	void PaginateRightAxisInput(float AxisValue);
+	void UpdateCurrentPage(int32 Offset);
 	
 	int32 LastPageOffset = 0;
 

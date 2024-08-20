@@ -69,6 +69,13 @@ void APaintPicker::RefreshUI()
 }
 
 
+void APaintPicker::UpdateCurrentPage(int32 Offset)
+{
+	CurrentPage = FMath::Clamp(CurrentPage + Offset, 0, GetNumberOfPages() - 1);
+	RefreshUI();
+}
+
+
 void APaintPicker::AddPainting()
 {
 	UPainterSaveGame::Create();
