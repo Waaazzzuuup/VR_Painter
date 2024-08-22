@@ -33,7 +33,7 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	USceneComponent* BrushTip;
-	// local to controller tip location, cache because its const
-	UPROPERTY(VisibleAnywhere)
+	// local to controller tip location, cache it because its const (set in BP)
+	UPROPERTY()
 	FVector BrushTipLocation;
 };
