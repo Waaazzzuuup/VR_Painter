@@ -3,6 +3,7 @@
 #include "Components/HorizontalBoxSlot.h"
 #include "Components/SizeBox.h"
 
+
 void UPaintingGrid::AddPainting(int32 PaintingIndex, FString PaintingName)
 {
 	if (PaintingsGrid == nullptr) return;
@@ -11,6 +12,7 @@ void UPaintingGrid::AddPainting(int32 PaintingIndex, FString PaintingName)
 	if (NewWidget == nullptr) return;
 
 	NewWidget->SetPaintingName(PaintingName);
+	NewWidget->SetParentPicker(ParentPicker);
 	
 	USizeBox* Cell = Cast<USizeBox>(PaintingsGrid->GetChildAt(PaintingIndex));
 	if (Cell == nullptr) return;

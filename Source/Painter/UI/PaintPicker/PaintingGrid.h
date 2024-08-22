@@ -19,6 +19,7 @@ public:
 	void AddPainting(int32 PaintingIndex, FString PaintingName);
 	void ClearAllPaintings();
 	void ClearAllPageDots();
+	void SetParentPicker(APaintPicker* NewParentPicker) {ParentPicker = NewParentPicker;}
 	
 	void AddPageDot(bool Active);
 
@@ -38,4 +39,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UPageDot> PageDotClass;
+
+	UPROPERTY()
+	APaintPicker* ParentPicker;
 };

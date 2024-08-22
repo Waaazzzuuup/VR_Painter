@@ -14,7 +14,14 @@ void UPaintingGridCard::SetPaintingName(FString NewPaintingName)
 
 void UPaintingGridCard::CardButtonClicked()
 {
-	// fix for long vr level loading 
-	UStereoLayerFunctionLibrary::ShowSplashScreen();
-	UGameplayStatics::OpenLevel(GetWorld(), "Canvas", true, "SlotName="+PaintingName);
+	if(ParentPicker->IsInDeleteMode())
+	{
+		ParentPicker->DeletePainting(PaintingName);
+	}
+	else
+	{
+		// fix for long vr level loading 
+		UStereoLayerFunctionLibrary::ShowSplashScreen();
+		UGameplayStatics::OpenLevel(GetWorld(), "Canvas", true, "SlotName="+PaintingName);
+	}
 }

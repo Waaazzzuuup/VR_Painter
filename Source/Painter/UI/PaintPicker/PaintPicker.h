@@ -13,9 +13,12 @@ class PAINTER_API APaintPicker : public AActor
 	
 public:	
 	APaintPicker();
+	
 	void AddPainting();
+	void DeletePainting(FString SlotName);
 	void ToggleDeleteMode();
 	void UpdateCurrentPage(int32 Offset);
+	bool IsInDeleteMode() const { return DeleteMode;}
 
 protected:
 	virtual void BeginPlay() override;
@@ -43,5 +46,7 @@ private:
 	int32 GetNumberOfPages() const;
 	
 	int32 CurrentPage = 0;
+
+	bool DeleteMode = false;
 
 };

@@ -27,3 +27,16 @@ void UPainterSaveGameIndex::AddSaveGame(UPainterSaveGame* SaveGame)
 	SlotNames.Add(SaveGame->GetSlotName());
 }
 
+
+void UPainterSaveGameIndex::DeleteSaveGame(FString SlotName)
+{
+	SlotNames.Remove(SlotName);
+	bool IsDeleted = UGameplayStatics::DeleteGameInSlot(SlotName, 0);
+	if (!IsDeleted)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CANT DELETE GAME %s"), *SlotName);
+		return;
+	}
+	Save();
+}
+

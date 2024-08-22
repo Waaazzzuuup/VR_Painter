@@ -31,6 +31,7 @@ void APaintPicker::BeginPlay()
 	}
 
 	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
+	PaintingsGrid->SetParentPicker(this);
 	
 	RefreshUI();
 }
@@ -49,13 +50,18 @@ void APaintPicker::RefreshSlots()
 	{
 		PaintingsGrid->AddPainting(i, SlotNames[StartOffset + i]);
 	}
+
+	if (DeleteMode) PaintingsGrid->SetColorAndOpacity(FLinearColor(1.0, 0.4, 0.4, 0.4)); 
+	else  PaintingsGrid->SetColorAndOpacity(FLinearColor::White); 
 }
 
 
 void APaintPicker::RefreshDots()
 {
 	if (PaintingsGrid == nullptr) return;
+	
 	PaintingsGrid->ClearAllPageDots();
+	
 	for (int32 i = 0; i < GetNumberOfPages(); i++)
 	{
 		PaintingsGrid->AddPageDot(i == CurrentPage);
@@ -84,12 +90,23 @@ void APaintPicker::AddPainting()
 }
 
 
+void APaintPicker::DeletePainting(FString SlotName)
+{
+	UPainterSaveGameIndex::Load()->DeleteSaveGame(SlotName);
+	RefreshUI();
+}
+
+
 void APaintPicker::ToggleDeleteMode()
 {
-	PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
-	if (PaintingsGrid == nullptr) return;
+	DeleteMode = !DeleteMode;
+	RefreshSlots();
+	RefreshDots();
 	
-	PaintingsGrid->ClearAllPaintings();
+	//PaintingsGrid = Cast<UPaintingGrid>(PaintGrid->GetUserWidgetObject());
+	//if (PaintingsGrid == nullptr) return;
+	
+	//PaintingsGrid->ClearAllPaintings();
 }
 
 
@@ -97,8 +114,8 @@ int32 APaintPicker::GetNumberOfPages() const
 {
 	if (PaintingsGrid == nullptr) return 0;
 	
-	int32 TotalNumberOfSlots = UPainterSaveGameIndex::Load()->GetSlotNames().Num();
-	int32 SlotsPerPage = PaintingsGrid->GetNumberOfSlots();
+	const int32 TotalNumberOfSlots = UPainterSaveGameIndex::Load()->GetSlotNames().Num();
+	const int32 SlotsPerPage = PaintingsGrid->GetNumberOfSlots();
 	
 	return FMath::CeilToInt( (float) TotalNumberOfSlots / SlotsPerPage);
 }

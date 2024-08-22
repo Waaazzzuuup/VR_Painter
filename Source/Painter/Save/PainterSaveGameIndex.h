@@ -17,6 +17,7 @@ public:
 	bool Save();
 
 	void AddSaveGame(UPainterSaveGame* SaveGame);
+	void DeleteSaveGame(FString SlotName);
 	TArray<FString> GetSlotNames() const {return SlotNames;}
 
 private:

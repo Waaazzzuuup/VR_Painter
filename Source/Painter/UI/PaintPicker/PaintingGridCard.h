@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PaintPicker.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -14,6 +15,7 @@ class PAINTER_API UPaintingGridCard : public UUserWidget
 
 public:
 	void SetPaintingName(FString NewPaintingName);
+	void SetParentPicker(APaintPicker* NewParentPicker) {ParentPicker = NewParentPicker;}
 
 protected:
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, meta = (BindWidget))
@@ -27,4 +29,7 @@ private:
 	void CardButtonClicked();
 
 	FString PaintingName;
+
+	UPROPERTY()
+	APaintPicker* ParentPicker;
 };
