@@ -28,7 +28,7 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AStroke> StrokeClass;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	AStroke* CurrentStroke;
 
 	UPROPERTY(EditAnywhere)
