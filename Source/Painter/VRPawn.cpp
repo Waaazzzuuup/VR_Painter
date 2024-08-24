@@ -3,6 +3,8 @@
 #include "Engine/World.h"
 #include "UI/PaintPicker/PaintPicker.h"
 #include "EngineUtils.h"
+#include "Stroke.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AVRPawn::AVRPawn()
@@ -60,6 +62,18 @@ void AVRPawn::RightTriggerReleased()
 {
 	if (RightHandController == nullptr) return;
 	RightHandController->TriggerReleased();
+}
+
+
+void AVRPawn::DeleteLastStrokeButtonPressed()
+{
+	// we dont need to iterate over every actor, but we need to get them all (its slow)
+	// actually we dont need to cast it to Stroke, as we simply destroy it
+	TArray<AActor*> StrokesInWorld;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AStroke::StaticClass(), StrokesInWorld);
+	const int32 n = StrokesInWorld.Num();
+	UE_LOG(LogTemp, Warning, TEXT("Found %d strokes"), n);
+	StrokesInWorld[n - 1] -> Destroy();
 }
 
 void AVRPawn::PaginateRightAxisInput(float AxisValue)
