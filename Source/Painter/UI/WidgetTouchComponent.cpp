@@ -1,5 +1,6 @@
 #include "Painter/UI/WidgetTouchComponent.h"
 
+
 void UWidgetTouchComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	FActorComponentTickFunction* ThisTickFunction)
 {
@@ -12,14 +13,12 @@ void UWidgetTouchComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	{
 		bIsClicked = true;
 		PressPointerKey(EKeys::LeftMouseButton);
-		UE_LOG(LogTemp, Warning, TEXT("Start hovering"));
 	}
 
 	if (!OverSmth && bIsClicked)
 	{
 		bIsClicked = false;
 		ReleasePointerKey(EKeys::LeftMouseButton);
-		UE_LOG(LogTemp, Warning, TEXT("No longer hovering"));
 	}
 	
 }

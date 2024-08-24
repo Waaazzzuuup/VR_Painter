@@ -51,7 +51,6 @@ void UPaintingGrid::AddPageDot(bool Active)
 
 	UHorizontalBoxSlot* BoxSlot = PagesDots->AddChildToHorizontalBox(NewPageDot);
 	BoxSlot->SetPadding(FMargin(8.0, 0.0, 0.0, 0.0));
-	UE_LOG(LogTemp, Warning, TEXT("dot added"));
 }
 
 

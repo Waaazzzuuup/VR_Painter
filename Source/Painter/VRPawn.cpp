@@ -76,6 +76,7 @@ void AVRPawn::DeleteLastStrokeButtonPressed()
 	StrokesInWorld[n - 1] -> Destroy();
 }
 
+
 void AVRPawn::PaginateRightAxisInput(float AxisValue)
 {
 	int32 PageOffset = 0;
@@ -96,19 +97,5 @@ void AVRPawn::UpdateCurrentPage(int32 Offset)
 		PaintPickerIter->UpdateCurrentPage(Offset);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
