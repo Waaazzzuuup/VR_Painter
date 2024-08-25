@@ -1,7 +1,5 @@
 #include "Stroke.h"
 
-#include "AssetRegistry/AssetDataTagMapSerializationDetails.h"
-
 
 // Sets default values
 AStroke::AStroke()
@@ -32,6 +30,7 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 	PreviousCursorLocation = CursorLocation;
 }
 
+
 FStrokeState AStroke::SerializeToStruct() const
 {
 	FStrokeState StrokeState;
@@ -39,6 +38,7 @@ FStrokeState AStroke::SerializeToStruct() const
 	StrokeState.ControlPoints = StrokePoints;
 	return StrokeState;
 }
+
 
 AStroke* AStroke::SpawnAndDeserializeFromStruct(UWorld* World, const FStrokeState& StrokeState)
 {
@@ -76,11 +76,13 @@ FVector AStroke::GetNextSegmentScale(FVector CursorLocation) const
 	return FVector(SplineVec.Size(), 1, 1);
 }
 
+
 FVector AStroke::GetNextSegmentLocation(FVector CursorLocation) const
 {
 	// so world cursor location goes to local in relation to stroke transform
 	return GetTransform().InverseTransformPosition(PreviousCursorLocation);
 }
+
 
 FQuat AStroke::GetNextSegmentRotation(FVector CursorLocation) const
 {
