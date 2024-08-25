@@ -44,7 +44,6 @@ private:
 
 	void RightTriggerPressed();
 	void RightTriggerReleased();
-	void DeleteLastStrokeButtonPressed();
 	void PaginateRightAxisInput(float AxisValue);
 	void UpdateCurrentPage(int32 Offset);
 	

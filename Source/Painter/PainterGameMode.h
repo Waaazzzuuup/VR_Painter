@@ -18,6 +18,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SaveAndQuit();
 
+	UFUNCTION(BlueprintCallable)
+	void DeleteLastStroke();
+
 protected:
 	virtual void BeginPlay() override;
 

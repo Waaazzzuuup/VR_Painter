@@ -1,5 +1,6 @@
 #include "PainterGameMode.h"
 
+#include "Stroke.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/StereoLayerFunctionLibrary.h"
 #include "Save/PainterSaveGame.h"
@@ -11,12 +12,14 @@ void APainterGameMode::InitGame(const FString& MapName, const FString& Options, 
 	SlotName = UGameplayStatics::ParseOption(Options, "SlotName");
 }
 
+
 void APainterGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	Load();
 	UStereoLayerFunctionLibrary::HideSplashScreen();
 }
+
 
 void APainterGameMode::Save() const
 {
@@ -48,4 +51,19 @@ void APainterGameMode::SaveAndQuit()
 {
 	Save();
 	UGameplayStatics::OpenLevel(GetWorld(), "MainMenu");
+}
+
+
+void APainterGameMode::DeleteLastStroke()
+{
+	// we dont need to iterate over every actor, but we need to get them all (its slow)
+	// actually we dont need to cast it to Stroke, as we simply destroy it
+	TArray<AActor*> StrokesInWorld;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AStroke::StaticClass(), StrokesInWorld);
+	const int32 n = StrokesInWorld.Num();
+	if (n>1)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found %d strokes"), n);
+		StrokesInWorld[n - 1] -> Destroy();
+	}
 }
