@@ -51,7 +51,7 @@ void APaintPicker::RefreshSlots()
 		PaintingsGrid->AddPainting(i, SlotNames[StartOffset + i]);
 	}
 
-	if (DeleteMode) PaintingsGrid->SetColorAndOpacity(FLinearColor(1.0, 0.4, 0.4, 0.4)); 
+	if (DeleteMode) PaintingsGrid->SetColorAndOpacity(FLinearColor(1.0, 0.3, 0.3, 0.3)); 
 	else  PaintingsGrid->SetColorAndOpacity(FLinearColor::White); 
 }
 
