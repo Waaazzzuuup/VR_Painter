@@ -71,5 +71,6 @@ void APainterGameMode::DeleteLastStroke()
 void APainterGameMode::ChangeThickness()
 {
 	ThicknessIndex++;
+	if (ThicknessIndex > sizeof(Thicks)/sizeof(Thicks[0]) ) ThicknessIndex = 0;
 	UE_LOG(LogTemp, Warning, TEXT("CurrentThickness is %f"), Thicks[ThicknessIndex]);
 }
