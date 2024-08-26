@@ -67,3 +67,9 @@ void APainterGameMode::DeleteLastStroke()
 		StrokesInWorld[n - 1] -> Destroy();
 	}
 }
+
+void APainterGameMode::ChangeThickness()
+{
+	ThicknessIndex++;
+	UE_LOG(LogTemp, Warning, TEXT("CurrentThickness is %f"), Thicks[ThicknessIndex]);
+}

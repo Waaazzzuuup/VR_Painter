@@ -21,10 +21,19 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DeleteLastStroke();
 
+	UFUNCTION(BlueprintCallable)
+	void ChangeThickness();
+
 protected:
 	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(VisibleAnywhere)
 	FString SlotName;
+
+	UPROPERTY(VisibleAnywhere)
+	int32 ThicknessIndex = 0;
+
+	UPROPERTY(EditDefaultsOnly)
+	float Thicks[5] = {1, 2, 4, 0.25, 0.5}; 
 };
