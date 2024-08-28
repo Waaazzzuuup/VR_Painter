@@ -43,4 +43,7 @@ private:
 
 	UPROPERTY()
 	TArray<FVector> StrokePoints;
+
+	UPROPERTY()
+	float Thickness;
 };

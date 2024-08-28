@@ -15,6 +15,9 @@ struct FStrokeState
 
 	UPROPERTY()
 	TArray<FVector> ControlPoints;
+
+	UPROPERTY()
+	float Thickness;
 };
 
 

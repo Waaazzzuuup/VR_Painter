@@ -1,5 +1,7 @@
 #include "Stroke.h"
 
+#include "Chaos/BoundingVolumeUtilities.h"
+
 
 // Sets default values
 AStroke::AStroke()
@@ -36,6 +38,7 @@ FStrokeState AStroke::SerializeToStruct() const
 	FStrokeState StrokeState;
 	StrokeState.StrokeClass = GetClass();
 	StrokeState.ControlPoints = StrokePoints;
+	StrokeState.Thickness = Thickness;
 	return StrokeState;
 }
 
