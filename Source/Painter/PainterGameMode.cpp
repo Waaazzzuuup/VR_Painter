@@ -61,7 +61,7 @@ void APainterGameMode::DeleteLastStroke()
 	TArray<AActor*> StrokesInWorld;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AStroke::StaticClass(), StrokesInWorld);
 	const int32 n = StrokesInWorld.Num();
-	if (n > 1)
+	if (n >= 1)
 	{
 		StrokesInWorld[n - 1] -> Destroy();
 	}
