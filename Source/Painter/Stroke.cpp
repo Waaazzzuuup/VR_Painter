@@ -1,5 +1,8 @@
 #include "Stroke.h"
 
+#include "PainterGameMode.h"
+
+
 // Sets default values
 AStroke::AStroke()
 {
@@ -13,7 +16,6 @@ AStroke::AStroke()
 	JointMeshes = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("JointMeshes"));
 	JointMeshes->SetupAttachment(Root);
 
-	
 }
 
 
@@ -22,6 +24,13 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 	StrokePoints.Add(CursorLocation);
 	if (PreviousCursorLocation.IsNearlyZero())
 	{
+		// well no begin play + cant getworld() in a constructor
+		APainterGameMode* PainterGameMode = Cast<APainterGameMode>(GetWorld()->GetAuthGameMode());
+		if (PainterGameMode) Thickness = PainterGameMode->GetThickness();
+		else Thickness = 1.0f;
+		
+		UE_LOG(LogTemp, Warning, TEXT("thicknbeess of stroke %f"), Thickness);
+		
 		PreviousCursorLocation = CursorLocation;
 		JointMeshes->AddInstance(GetNextJointTransform(CursorLocation));
 		return;
@@ -69,6 +78,7 @@ FTransform AStroke::GetNextJointTransform(FVector CursorLocation) const
 	FTransform JointTransform;
 	// location is the same actually
 	JointTransform.SetLocation(GetNextSegmentLocation(CursorLocation));
+	JointTransform.SetScale3D(FVector(Thickness, Thickness, Thickness ));
 	return JointTransform;
 }
 
@@ -76,7 +86,7 @@ FTransform AStroke::GetNextJointTransform(FVector CursorLocation) const
 FVector AStroke::GetNextSegmentScale(FVector CursorLocation) const
 {
 	FVector SplineVec = CursorLocation - PreviousCursorLocation;
-	return FVector(SplineVec.Size(), 1, 1);
+	return FVector(SplineVec.Size(), Thickness, Thickness);
 }
 
 
