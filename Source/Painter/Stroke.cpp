@@ -1,8 +1,5 @@
 #include "Stroke.h"
 
-#include "Chaos/BoundingVolumeUtilities.h"
-
-
 // Sets default values
 AStroke::AStroke()
 {
@@ -15,6 +12,8 @@ AStroke::AStroke()
 	
 	JointMeshes = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("JointMeshes"));
 	JointMeshes->SetupAttachment(Root);
+
+	
 }
 
 
@@ -46,6 +45,7 @@ FStrokeState AStroke::SerializeToStruct() const
 AStroke* AStroke::SpawnAndDeserializeFromStruct(UWorld* World, const FStrokeState& StrokeState)
 {
 	AStroke* Stroke = World->SpawnActor<AStroke>(StrokeState.StrokeClass);
+	Stroke->SetThickness(StrokeState.Thickness);
 	for (FVector Location : StrokeState.ControlPoints)
 	{
 		Stroke->UpdateStroke(Location);

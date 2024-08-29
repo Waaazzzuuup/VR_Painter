@@ -63,7 +63,6 @@ void APainterGameMode::DeleteLastStroke()
 	const int32 n = StrokesInWorld.Num();
 	if (n > 1)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Found %d strokes"), n);
 		StrokesInWorld[n - 1] -> Destroy();
 	}
 }
@@ -72,5 +71,5 @@ void APainterGameMode::ChangeThickness()
 {
 	ThicknessIndex++;
 	if (ThicknessIndex > sizeof(Thicks)/sizeof(Thicks[0]) - 1 ) ThicknessIndex = 0;
-	UE_LOG(LogTemp, Warning, TEXT("CurrentThickness is %f"), Thicks[ThicknessIndex]);
+	CurrentThickness = Thicks[ThicknessIndex];
 }

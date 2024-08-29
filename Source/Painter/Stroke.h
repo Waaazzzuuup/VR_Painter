@@ -16,6 +16,7 @@ public:
 	AStroke();
 	
 	void UpdateStroke(FVector CursorLocation);
+	void SetThickness(float NewThickness) { Thickness = NewThickness;}
 
 	FStrokeState SerializeToStruct() const;
 	// receive address here as struct can be quite large
@@ -45,5 +46,5 @@ private:
 	TArray<FVector> StrokePoints;
 
 	UPROPERTY()
-	float Thickness;
+	float Thickness = 1.0f;
 };

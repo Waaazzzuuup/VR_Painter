@@ -24,6 +24,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ChangeThickness();
 
+	float GetThickness() const {return CurrentThickness;}
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -33,6 +35,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	int32 ThicknessIndex = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	float CurrentThickness = 1.0;
 
 	UPROPERTY(EditDefaultsOnly)
 	float Thicks[5] = {1, 2, 4, 0.25, 0.5}; 
