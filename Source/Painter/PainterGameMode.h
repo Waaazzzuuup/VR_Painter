@@ -24,6 +24,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void ChangeThickness();
 
+	UFUNCTION(BlueprintCallable)
 	float GetThickness() const {return CurrentThickness;}
 
 protected:
