@@ -24,12 +24,14 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 	StrokePoints.Add(CursorLocation);
 	if (PreviousCursorLocation.IsNearlyZero())
 	{
-		// well no begin play + cant getworld() in a constructor
-		APainterGameMode* PainterGameMode = Cast<APainterGameMode>(GetWorld()->GetAuthGameMode());
-		if (PainterGameMode) Thickness = PainterGameMode->GetThickness();
-		else Thickness = 1.0f;
-		
-		UE_LOG(LogTemp, Warning, TEXT("thicknbeess of stroke %f"), Thickness);
+		// check if it was set (can be set from deserializing)
+		if (Thickness - 0.0 < 0.0001)
+		{
+			// well no begin play + cant getworld() in a constructor
+			APainterGameMode* PainterGameMode = Cast<APainterGameMode>(GetWorld()->GetAuthGameMode());
+			if (PainterGameMode) Thickness = PainterGameMode->GetThickness();
+			else Thickness = 1.0f;
+		}
 		
 		PreviousCursorLocation = CursorLocation;
 		JointMeshes->AddInstance(GetNextJointTransform(CursorLocation));

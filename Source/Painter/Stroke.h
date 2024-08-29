@@ -45,6 +45,7 @@ private:
 	UPROPERTY()
 	TArray<FVector> StrokePoints;
 
+	// must be zero to see if it is actually deserialized and set
 	UPROPERTY()
-	float Thickness = 1.0f;
+	float Thickness = 0.0f;
 };
