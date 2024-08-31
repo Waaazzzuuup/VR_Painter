@@ -41,5 +41,5 @@ private:
 	float CurrentThickness = 1.0;
 
 	UPROPERTY(EditDefaultsOnly)
-	float Thicks[5] = {1, 2, 3, 0.25, 0.5}; 
+	float Thicks[8] = {1, 2, 3, 4, 10, 0.25, 0.5, 0.75}; 
 };
