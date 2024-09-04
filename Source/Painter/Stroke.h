@@ -16,7 +16,8 @@ public:
 	AStroke();
 	
 	void UpdateStroke(FVector CursorLocation);
-	void SetThickness(float NewThickness) { Thickness = NewThickness;}
+	void SetThickness(float NewThickness);
+	void SetMaterialColor(FVector NewColor);
 
 	FStrokeState SerializeToStruct() const;
 	// receive address here as struct can be quite large
@@ -30,6 +31,8 @@ private:
 	FVector GetNextSegmentScale(FVector CursorLocation) const;
 	FVector GetNextSegmentLocation(FVector CursorLocation) const;
 	FQuat GetNextSegmentRotation(FVector CursorLocation) const;
+
+	void SetupStrokeParameters();
 	
 	UPROPERTY(VisibleAnywhere)
 	USceneComponent* Root;
@@ -44,8 +47,13 @@ private:
 
 	UPROPERTY()
 	TArray<FVector> StrokePoints;
-
-	// must be zero to see if it is actually deserialized and set
+	
 	UPROPERTY()
-	float Thickness = 0.0f;
+	float Thickness;
+
+	UPROPERTY()
+	FVector MaterialColor;
+
+	bool IsThicknessSet;
+	bool IsMaterialColorSet;
 };

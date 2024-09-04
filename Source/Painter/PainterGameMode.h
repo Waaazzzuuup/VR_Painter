@@ -27,6 +27,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetThickness() const {return CurrentThickness;}
 
+	UFUNCTION(BlueprintCallable)
+	FVector GetStrokeColor() const {return CurrentStrokeColor;}
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -41,5 +44,8 @@ private:
 	float CurrentThickness = 1.0;
 
 	UPROPERTY(EditDefaultsOnly)
-	float Thicks[8] = {1, 2, 3, 4, 10, 0.25, 0.5, 0.75}; 
+	float Thicks[8] = {1, 2, 3, 4, 10, 0.25, 0.5, 0.75};
+
+	UPROPERTY(VisibleAnywhere)
+	FVector CurrentStrokeColor = FVector(0,0,0);
 };

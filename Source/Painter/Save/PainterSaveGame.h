@@ -18,6 +18,9 @@ struct FStrokeState
 
 	UPROPERTY()
 	float Thickness;
+
+	UPROPERTY()
+	FVector MaterialColor;
 };
 
 

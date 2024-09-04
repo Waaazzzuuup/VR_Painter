@@ -15,7 +15,7 @@ AStroke::AStroke()
 	
 	JointMeshes = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("JointMeshes"));
 	JointMeshes->SetupAttachment(Root);
-
+	
 }
 
 
@@ -24,14 +24,8 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 	StrokePoints.Add(CursorLocation);
 	if (PreviousCursorLocation.IsNearlyZero())
 	{
-		// check if it was set (can be set from deserializing)
-		if (Thickness - 0.0 < 0.0001)
-		{
-			// well no begin play + cant getworld() in a constructor
-			APainterGameMode* PainterGameMode = Cast<APainterGameMode>(GetWorld()->GetAuthGameMode());
-			if (PainterGameMode) Thickness = PainterGameMode->GetThickness();
-			else Thickness = 1.0f;
-		}
+		// first point of stroke - get parameters from other places for a setup
+		SetupStrokeParameters();	
 		
 		PreviousCursorLocation = CursorLocation;
 		JointMeshes->AddInstance(GetNextJointTransform(CursorLocation));
@@ -43,12 +37,34 @@ void AStroke::UpdateStroke(FVector CursorLocation)
 }
 
 
+void AStroke::SetupStrokeParameters()
+{
+	// no begin play + cant getworld() in a constructor
+	// we get GM here, cos it will be used multiple times
+	APainterGameMode* PainterGameMode = Cast<APainterGameMode>(GetWorld()->GetAuthGameMode());
+
+	if (!PainterGameMode) return;
+	
+	// check if it was set (can be set from deserializing)
+	if (!IsThicknessSet)
+	{
+		SetThickness(PainterGameMode->GetThickness());
+	}
+
+	if (!IsMaterialColorSet)
+	{
+		SetMaterialColor(PainterGameMode->GetStrokeColor());
+	}
+}
+
+
 FStrokeState AStroke::SerializeToStruct() const
 {
 	FStrokeState StrokeState;
 	StrokeState.StrokeClass = GetClass();
 	StrokeState.ControlPoints = StrokePoints;
 	StrokeState.Thickness = Thickness;
+	StrokeState.MaterialColor = MaterialColor;
 	return StrokeState;
 }
 
@@ -57,6 +73,7 @@ AStroke* AStroke::SpawnAndDeserializeFromStruct(UWorld* World, const FStrokeStat
 {
 	AStroke* Stroke = World->SpawnActor<AStroke>(StrokeState.StrokeClass);
 	Stroke->SetThickness(StrokeState.Thickness);
+	Stroke->SetMaterialColor(StrokeState.MaterialColor);
 	for (FVector Location : StrokeState.ControlPoints)
 	{
 		Stroke->UpdateStroke(Location);
@@ -106,3 +123,19 @@ FQuat AStroke::GetNextSegmentRotation(FVector CursorLocation) const
 	// splines extrude along the x axis? whaa
 	return FQuat::FindBetweenNormals(FVector::ForwardVector, SegmentVectorNormal);
 }
+
+
+void AStroke::SetThickness(float NewThickness)
+{
+	Thickness = NewThickness;
+	IsThicknessSet = true;
+}
+
+
+void AStroke::SetMaterialColor(FVector NewColor)
+{
+	MaterialColor = NewColor;
+	IsMaterialColorSet = true;
+}
+
+
