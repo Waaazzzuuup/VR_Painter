@@ -120,7 +120,7 @@ FQuat AStroke::GetNextSegmentRotation(FVector CursorLocation) const
 {
 	FVector SegmentVector = CursorLocation - PreviousCursorLocation;
 	FVector SegmentVectorNormal = SegmentVector.GetSafeNormal();
-	// splines extrude along the x axis? whaa
+	// splines extrude along the x-axis? whaa
 	return FQuat::FindBetweenNormals(FVector::ForwardVector, SegmentVectorNormal);
 }
 
