@@ -16,7 +16,7 @@ AStroke::AStroke()
 	JointMeshes = CreateDefaultSubobject<UInstancedStaticMeshComponent>(TEXT("JointMeshes"));
 	JointMeshes->SetupAttachment(Root);
 
-	StrokeMaterial = UMaterialInstanceDynamic::Create(BaseStrokeMaterial, this);
+	StrokeMaterial = CreateDefaultSubobject<UMaterialInstanceDynamic>(TEXT("StrokeMaterial"));
 }
 
 
@@ -137,6 +137,7 @@ void AStroke::SetMaterialColor(FVector NewColor)
 {
 	MaterialColor = NewColor;
 	IsMaterialColorSet = true;
+	StrokeMaterial = UMaterialInstanceDynamic::Create(BaseStrokeMaterial, this);
 	StrokeMaterial->SetVectorParameterValue("PRM_Color", FLinearColor(MaterialColor));
 	JointMeshes->SetMaterial(0, StrokeMaterial);
 	StrokeMeshes->SetMaterial(0, StrokeMaterial);
