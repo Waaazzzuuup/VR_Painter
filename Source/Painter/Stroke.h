@@ -54,6 +54,12 @@ private:
 	UPROPERTY()
 	FVector MaterialColor;
 
+	UPROPERTY(EditDefaultsOnly)
+	UMaterialInstance* BaseStrokeMaterial;
+
+	UPROPERTY(VisibleAnywhere)
+	UMaterialInstanceDynamic* StrokeMaterial;
+
 	bool IsThicknessSet;
 	bool IsMaterialColorSet;
 };
