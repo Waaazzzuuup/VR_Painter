@@ -53,7 +53,7 @@ private:
 	int32 ColorIndex = 0;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector Colors[2] = {FVector(0,0,0), FVector(1,0,0)};
+	FVector Colors[2] = {FVector(0,0,0), FVector(1,1,1)};
 	
 	UPROPERTY(VisibleAnywhere)
 	FVector CurrentStrokeColor = FVector(0,0,0);
