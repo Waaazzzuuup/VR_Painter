@@ -47,7 +47,7 @@ private:
 	float CurrentThickness = 1.0;
 
 	UPROPERTY(EditDefaultsOnly)
-	float Thicks[8] = {1, 2, 3, 4, 10, 0.25, 0.5, 0.75};
+	float Thicks[7] = {1, 2, 3, 4, 0.25, 0.5, 0.75};
 	
 	UPROPERTY(VisibleAnywhere)
 	int32 ColorIndex = 0;
