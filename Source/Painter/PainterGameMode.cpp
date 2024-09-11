@@ -73,3 +73,11 @@ void APainterGameMode::ChangeThickness()
 	if (ThicknessIndex > sizeof(Thicks)/sizeof(Thicks[0]) - 1 ) ThicknessIndex = 0;
 	CurrentThickness = Thicks[ThicknessIndex];
 }
+
+
+void APainterGameMode::ChangeColor()
+{
+	ColorIndex++;
+	if (ColorIndex > sizeof(Colors)/sizeof(Colors[0]) - 1 ) ColorIndex = 0;
+	CurrentStrokeColor = Colors[ColorIndex];
+}
